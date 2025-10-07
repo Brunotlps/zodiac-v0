@@ -1,0 +1,126 @@
+:root{
+  --bg: #f7f9fc;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --blue: #1E6FFF;       /* primary blue */
+  --gold: #D4AF37;       /* accent gold */
+  --accent-muted: rgba(29,111,255,0.08);
+  --max-width: 980px;
+  --radius: 10px;
+  --gap: 1rem;
+  --shadow: 0 8px 24px rgba(16,24,40,0.06);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background:var(--bg);
+  color:#0f172a;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding:2rem 1rem;
+  display:flex;
+  justify-content:center;
+}
+
+:root{
+  --bg: #091029;            /* very dark navy */
+  --surface: #071427;       /* slightly lighter surface */
+  --text: #e6eef8;          /* light text */
+  --muted: #98a6c3;         /* muted text */
+  --blue: #1e6fff;          /* bright primary blue */
+  --blue-dark: #1450cc;     /* darker blue for contrast */
+  --gold: #FFD24A;          /* bright gold accent */
+  --gold-dark: #D4AA2F;     /* darker gold for depth */
+  --card-shadow: 0 10px 30px rgba(3,10,30,0.6);
+  --glass: rgba(255,255,255,0.03);
+  --radius: 12px;
+  --max-width: 980px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(180deg,var(--bg), #061024 80%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding:2rem 1rem;
+  display:flex;
+  justify-content:center;
+}
+
+.container{width:100%;max-width:var(--max-width)}
+
+/* Header */
+header{display:flex;justify-content:center;align-items:center;gap:1rem}
+header h1{margin:0;font-size:2.4rem;color:#f5ca3bd8;letter-spacing:-0.3px}
+.header-meta{color:var(--muted);font-size:0.95rem}
+
+/* Form */
+form{display:flex;gap:0.6rem;align-items:center;margin-top:1rem;flex-wrap:wrap}
+label{min-width:72px;color:#fcd75fd8;font-weight:600}
+input[type="text"], input[type="date"], input:not([type]){
+  padding:0.5rem 0.65rem;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.04);
+  background:linear-gradient(180deg,var(--glass), rgba(255,255,255,0.01));
+  color:var(--text);
+  min-width:200px;
+}
+input:focus{outline:none;box-shadow:0 8px 24px rgba(30,111,255,0.12);border-color:var(--blue)}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:0.5rem;border-radius:10px;padding:0.5rem 0.8rem;border:none;font-weight:700;cursor:pointer;
+}
+.btn-primary{
+  background:linear-gradient(180deg,var(--blue),var(--blue-dark));color:#fff;box-shadow:0 8px 24px rgba(30,111,255,0.14);
+}
+.btn-gold{
+  background: linear-gradient(180deg,var(--gold),var(--gold-dark));
+  color:#072033;
+  box-shadow: 0 8px 24px rgba(212,170,47,0.12);
+}
+.btn:hover{filter:brightness(0.98)}
+
+/* Card */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.03);
+  padding:1.25rem;border-radius:var(--radius);
+  margin-top:1rem;box-shadow:var(--card-shadow);
+}
+
+.meta{color:var(--muted);font-size:0.95rem;margin-bottom:0.5rem}
+
+/* Prediction */
+.pred-section{margin-top:1rem}
+.pred-section h3{margin:0.25rem 0;font-size:1rem;color:var(--text)}
+.pred-section p{margin:0.35rem 0;line-height:1.5;color:var(--text)}
+
+/* Lucky / tips list */
+.luck-list{margin:0.5rem 0;padding-left:1.1rem}
+.luck-list li{margin:0.25rem 0;color:var(--muted)}
+
+/* Color chips */
+.colors{display:flex;gap:10px;margin-top:0.5rem;align-items:center}
+.color-sample{width:36px;height:22px;border-radius:6px;border:1px solid rgba(0,0,0,0.18);box-shadow:0 6px 18px rgba(2,8,20,0.5)}
+
+/* Raw JSON */
+pre{background:rgba(255,255,255,0.02);padding:1rem;border-radius:10px;overflow:auto;font-size:0.92rem;color:var(--muted)}
+
+/* Footer small note */
+.note{margin-top:0.75rem;color:var(--muted);font-size:0.9rem}
+
+/* Responsive adjustments */
+@media (max-width:640px){
+  header{flex-direction:column;align-items:flex-start;gap:0.5rem}
+  form{flex-direction:column;align-items:stretch}
+  input[type="text"]{width:100%}
+  .btn{width:100%;justify-content:center}
+}

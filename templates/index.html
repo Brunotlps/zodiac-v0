@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Zodiac Energy Drink — Demo</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Zodiac Energy Drink — Demo</h1>
+    </header>
+
+    <form method="post" action="/">
+      <label for="sign">Sign</label>
+      <input id="sign" name="sign" value="{{ sign or '' }}" required>
+      <button type="submit">Search</button>
+    </form>
+
+    {% if result %}
+      <div class="card">
+        {% if result.ok %}
+          {% set payload = result.data %}
+          <div class="meta">Response: status {{ result.status_code }} — {{ payload.get('message') or '' }}</div>
+
+          {% if payload.data is mapping %}
+            {% set d = payload.data %}
+            <h2>{{ d.get('sign')|capitalize }} — Prediction</h2>
+
+            <div class="pred-section">
+              <h3>Emotions</h3>
+              <p>{{ d.prediction.emotions }}</p>
+            </div>
+
+            <div class="pred-section">
+              <h3>Health</h3>
+              <p>{{ d.prediction.health }}</p>
+            </div>
+
+            <div class="pred-section">
+              <h3>Personal</h3>
+              <p>{{ d.prediction.personal }}</p>
+            </div>
+
+            <div class="pred-section">
+              <h3>Professional</h3>
+              <p>{{ d.prediction.profession }}</p>
+            </div>
+
+            <div class="pred-section">
+              <h3>Travel</h3>
+              <p>{{ d.prediction.travel }}</p>
+            </div>
+
+            <div class="pred-section">
+              <h3>Luck / Tips</h3>
+              {% if d.prediction.luck is iterable %}
+                <ul>
+                  {% for item in d.prediction.luck %}
+                    <li>{{ item }}</li>
+                  {% endfor %}
+                </ul>
+              {% else %}
+                <p>{{ d.prediction.luck }}</p>
+              {% endif %}
+            </div>
+
+            <div class="pred-section">
+              <h3>Extra Info</h3>
+              <p><strong>API message:</strong> {{ payload.get('message') }}</p>
+              <p><strong>Success:</strong> {{ payload.get('success') }}</p>
+              {% if d.special and d.special.lucky_color_codes %}
+                <p><strong>Lucky colors:</strong></p>
+                <div class="colors">
+                  {% for col in d.special.lucky_color_codes %}
+                    <div class="color-sample" title="{{ col }}" style="background:{{ col.strip() }}"></div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+
+            <h3>Full response (raw)</h3>
+            <pre>{{ payload | tojson(indent=2) }}</pre>
+
+          {% else %}
+            <!-- If payload.data is plain text -->
+            <h2>Response</h2>
+            <pre>{{ payload.data }}</pre>
+          {% endif %}
+
+        {% else %}
+          <h2>Error fetching</h2>
+          <p>Status: {{ result.status_code or '—' }}</p>
+          <pre>{{ result.error }}</pre>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
